@@ -9,6 +9,7 @@ public class LeagueInvaders {
 	final int HEIGHT = 800;
 	GamePanel GP;
 	
+	
 public LeagueInvaders() {
 	
 	

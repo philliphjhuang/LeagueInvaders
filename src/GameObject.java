@@ -17,28 +17,24 @@ public class GameObject {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
+		
 	
 	}
 	
 	void update() {
-		x+=3;
-		y+=5;
-		
+
 		
 		
 	}
 	
 	void draw(Graphics g) {
-		g.fillRect(x, y, 100, 100);
-		
-		
-		
-		
+
 		
 		
 	}
 	
-	
+
 	
 	
 	
