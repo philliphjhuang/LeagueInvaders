@@ -27,11 +27,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
 	Rocketship RS = new Rocketship(250,700,50,50);
 	
+	ObjectManager OM = new ObjectManager(RS);
+	
 	void updateMenuState() {
 		
 	}
 	void updateGameState() {
-		RS.update();
+		OM.update();
+		
 	}
 	void updateEndState() {
 		
@@ -62,7 +65,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 
 		g.fillRect(0,0, 9999, 9999); 
 		
-		RS.draw(g);
+		OM.draw(g);
 		
 	}
 	void drawEndState(Graphics g) {
@@ -178,15 +181,36 @@ public void keyPressed(KeyEvent e) {
 	}
 	
 	if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-		
+		RS.left=true;
+	} else if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		RS.right=true;
+	} else if(e.getKeyCode()==KeyEvent.VK_UP) {
+		RS.up=true;
+	} else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+		RS.down=true;
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 }
 @Override
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
-
+	if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+		RS.left=false;
+	} else if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		RS.right=false;
+	} else if(e.getKeyCode()==KeyEvent.VK_UP) {
+		RS.up=false;
+	} else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+		RS.down=false;
+	}
+	
 }
 
 

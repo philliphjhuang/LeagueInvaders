@@ -10,7 +10,7 @@ public class GameObject {
 
      int height;
 	
-	
+	boolean isAlive = true;
 	
 	public GameObject(int x, int y, int width, int height) {
 		this.x = x;
