@@ -189,7 +189,10 @@ public void keyPressed(KeyEvent e) {
 	} else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
 		RS.down=true;
 	}
-	
+	if(e.getKeyCode()==KeyEvent.VK_SPACE){
+		OM.addProjectile(new Projectile(RS.x+20,RS.y,10,10));
+		
+	}
 	
 	
 	

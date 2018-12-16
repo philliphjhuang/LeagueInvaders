@@ -16,9 +16,10 @@ int speed;
 	
 	void update() {
 	y-=speed;
-	/*
-	 Part 10 Step 7
-	 */
+	if(y<0){
+		isAlive = false;
+	}
+	
 	}
 	
 	void draw(Graphics g) {
