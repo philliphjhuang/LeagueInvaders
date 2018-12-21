@@ -9,7 +9,7 @@ public class ObjectManager {
 	ArrayList<Alien> aliens = new ArrayList<Alien>();
 	
 	long enemyTimer = 0;
-	int enemySpawnTime = 1000;
+	int enemySpawnTime = 1500;
 	
 	public ObjectManager(Rocketship RS) {
 	this.RS=RS;
@@ -51,12 +51,58 @@ public class ObjectManager {
 	
 	public void manageEnemies(){
         if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-                addAlien(new Alien(new Random().nextInt(RS.width), 0, 50, 50));
+        			
+                addAlien(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
 
 enemyTimer = System.currentTimeMillis();
         }
 }
 	
 	
+	void purgeObjects() {
+    	for(int i = 0; i <=aliens.size(); i++) {
+    		
+    		aliens.remove(i);
+    		
+    	}
+    }
+	
+	void checkCollsion() {
+		for(Alien a : aliens){
+
+	        if(RS.collisionBox.intersects(a.collisionBox)) {
+
+	                RS.isAlive = false;
+
+	        }
+	    for(int i = 0; i<projectiles.size(); i++) {
+	        if(projectiles.collisionBox.intersects(a.collisionBox)) {
+	        aliens.remove(i);
+	        	projectiles.remove(i);
+	        }
+	}
+	}
+	}
+	
+	
+	
+	
+	
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

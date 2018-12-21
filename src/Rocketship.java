@@ -21,6 +21,7 @@ boolean left = false;
 		} 
 
 		void update() {
+			super.update();
 			if(up==true) {
 				y-=speed;
 			}

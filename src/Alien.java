@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Alien extends GameObject{
@@ -12,11 +13,14 @@ public class Alien extends GameObject{
 	}
 
 	void update(){
-	y++;
-		
+		super.update();
+	y+=3;
+	
+	
 	}
 	
 	void draw(Graphics g){
+	g.setColor(Color.PINK);
 	g.fillRect(x, y, width, height);
 		
 	}

@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Projectile extends GameObject{
+
 int speed;
 	
 	
@@ -15,6 +16,7 @@ int speed;
 	}
 	
 	void update() {
+	super.update();
 	y-=speed;
 	if(y<0){
 		isAlive = false;
