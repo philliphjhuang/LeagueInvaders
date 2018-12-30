@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -29,6 +33,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
 	ObjectManager OM = new ObjectManager(RS);
 	
+	  public static BufferedImage alienImg;
+
+      public static BufferedImage rocketImg;
+
+      public static BufferedImage bulletImg;
+
+      public static BufferedImage spaceImg;
+	
 	void updateMenuState() {
 		
 	}
@@ -37,6 +49,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		OM.manageEnemies();
 		OM.checkCollsion();
 		OM.purgeObjects();
+		if(RS.isAlive==false) {
+			currentState = END_STATE;
+		}
 	}
 	void updateEndState() {
 		
@@ -67,6 +82,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 
 		g.fillRect(0,0, 9999, 9999); 
 		
+		g.drawImage(spaceImg,0,0,spaceImg.getWidth(),spaceImg.getHeight(),null);
+		
 		OM.draw(g);
 		
 	}
@@ -83,7 +100,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 		g.setFont(smallFont);
 		
-		g.drawString("You killed " +  " enemies", 138, 350);
+		g.drawString("You killed " + OM.getScore() + " enemies", 138, 350);
 		
 		g.drawString("Press ENTER to rerstart",110,500);
 		
@@ -100,7 +117,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	titleFont = new Font("Arial",Font.BOLD,48);
 	smallFont = new Font("Arial",Font.BOLD,24);
 	
-	
+	  try {
+
+          alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+
+          rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+
+          bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+
+          spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+
+  } catch (IOException e) {
+
+          // TODO Auto-generated catch block
+
+          e.printStackTrace();
+
+  }
+
+
 
 	}
 void startGame() {
@@ -173,10 +208,13 @@ public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
 
 	if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+		if(currentState==END_STATE) {
+		RS = new Rocketship(250,700,50,50);
+		OM = new ObjectManager(RS);
+	}
 		System.out.println(WIDTH+" "+HEIGHT);
 		currentState ++;
 	}
-	
 	if(currentState > END_STATE){
 		
         currentState = MENU_STATE;
@@ -193,7 +231,9 @@ public void keyPressed(KeyEvent e) {
 	}
 	if(e.getKeyCode()==KeyEvent.VK_SPACE){
 		OM.addProjectile(new Projectile(RS.x+20,RS.y,10,10));
-		
+		if(currentState==MENU_STATE) {
+			JOptionPane.showMessageDialog(null, "Use arrow keys to move. Press SPACE to fire. Try not to die.");
+		}
 	}
 	
 	
